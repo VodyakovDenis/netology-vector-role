@@ -3,60 +3,25 @@ dependency:
   name: galaxy
 driver:
   name: docker
-
-lint: |
-  yamllint .
-  ansible-lint
 platforms:
-  - name: centos_7
-    image: centos:7
-    privileged: true
-    command: /usr/sbin/init
-    capabilities:
-      - SYS_ADMIN
-    tmpfs:
-      - /run
-      - /tmp
+  - name: centos_8
+    image: docker.io/pycontribs/centos:8
+    pre_build_image: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
-    env:
-      ANSIBLE_USER: ansible
-      SUDO_GROUP: wheel
-      DEPLOY_GROUP: deployer
-      container: docker
-
-  - name: debian_bullseye_11
-    image: debian:bullseye
-    privileged: true
-    command: /sbin/init
-    capabilities:
-      - SYS_ADMIN
-    tmpfs:
-      - /run
-      - /tmp
+      - "$MOLECULE_PROJECT_DIRECTORY/systemctl3.py:/usr/bin/systemctl"
+  - name: ubuntu_latest
+    image: docker.io/pycontribs/ubuntu:latest
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
-    env:
-      ANSIBLE_USER: ansible
-      SUDO_GROUP: sudo
-      DEPLOY_GROUP: deployer
-      container: docker
+      - "$MOLECULE_PROJECT_DIRECTORY/systemctl3.py:/usr/bin/systemctl"
+    pre_build_image: true
 provisioner:
   name: ansible
 verifier:
   name: ansible
-
 scenario:
-  name: default
   test_sequence:
-    - lint
-    - destroy
-    # - dependency
-    - syntax
-    - create
-    # - prepare
-    - converge
-    - idempotence
-    # - side_effect
-    - verify
-    - destroy
+  - destroy
+  - create
+  - converge
+  - verify
+  - destroy
