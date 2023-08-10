@@ -2,8 +2,8 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Get OS version
-      ansible.builtin.command: lsb_release -a
-      register: os_info
+    - name: molecule converge
+      ansible.builtin.command: vector --version
+      register: v_info
     - debug:
-        var: os_info.stdout_lines
+        var: v_info.stdout_lines
