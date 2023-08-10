@@ -2,17 +2,18 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: podman
 platforms:
-  - name: CentOS_8_Stream
+  - name: instance
     image: quay.io/centos/centos:stream8
     pre_build_image: true
-
-  - name: Ubuntu_Latest
-    image: docker.io/pycontribs/ubuntu:latest
-    pre_build_image: true
-
 provisioner:
   name: ansible
 verifier:
   name: ansible
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge
+    - destroy

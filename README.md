@@ -1,39 +1,32 @@
 vector-role
 =========
 
-Учебная роль.
-Устанавливает и настраивает [vector](https://vector.dev).
+Роль по установке и настройке Vector, созданная в учебных целях.
 
 Requirements
 ------------
 
+Роль написана для EL-систем (CentOS 8 Stream, CentOS 9 Stream)
 
- vector_version - Определяет версию vector 
+Role Variables
+--------------
 
-Dependencies
-------------
+| Variable | Default value | Description |
+-----------|---------------|------------
+| vector_version | 0.30.0 | Определяет версию Vector для установки |
+| vector_data_path | /var/lib/vector | Определяет путь, куда Vector будет писать данные
+| vector_user | cloud-user | Определяет пользователя для запуска сервиса vector.service
 
-No dependencies
 
-Example Playbook
-----------------
+Tags
+----
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - vector-role
-
-License
--------
-
-MIT
-
-Author Information
-------------------
-[Vector](https://vector.dev) by [Datadog](https://www.datadoghq.com/about/)
-
-Role by [Maslov Konstantin](https://github.com/maslovkv).
-
-Dear contributors, thank you.
+| Tag | Description |
+|-----|-------------|
+| download_vector_distrib | Таск скачивает указанную версию Vector в подготовленную папку |
+| unpack_vector | Таск рапаковывает Vector в указанную папку |
+| copy_vector_and_install | Таск копирует исполняемый файл Vector в папку с исполняемыми файлами в операционной системе |
+| copy_vector_conf | Таск создает конфигурационный файл `vector.yaml` по указанному шаблону |
+| create_vector_service | Таск создает сервис `vector.service`, используя шаблонный файл |
+| check_vector_version | Таск проверяет корректность установки нужной версии Vector |
 
