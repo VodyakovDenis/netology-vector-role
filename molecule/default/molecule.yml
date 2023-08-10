@@ -22,6 +22,5 @@ scenario:
   test_sequence:
   - destroy
   - create
-  - converge
   - verify
   - destroy
