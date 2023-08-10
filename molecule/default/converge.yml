@@ -2,6 +2,8 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include vector_role"
-      ansible.builtin.include_role:
-        name: vector_role
+    - name: Get OS version
+      ansible.builtin.command: lsb_release -a
+      register: os_info
+    - debug:
+        var: os_info.stdout_lines
