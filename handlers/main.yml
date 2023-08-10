@@ -1,8 +1,10 @@
 ---
-- name: Restart vector service
-  become: true
-  ansible.builtin.service:
+- name: Restart Vector
+  become: "{{ 'false' if ansible_user_uid == 0 else 'true' }}"
+  ansible.builtin.systemd:
     name: vector
-    state: started
+    state: restarted
+    enabled: yes
     daemon_reload: true
-  listen: restart-vector
+  tags:
+    - vector

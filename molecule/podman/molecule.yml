@@ -4,32 +4,22 @@ dependency:
 driver:
   name: podman
 platforms:
-  - name: centos_7
-    image: docker.io/library/centos:7
-    privileged: true
-    command: /usr/sbin/init
-    capabilities:
-      - SYS_ADMIN
-    tmpfs:
-      - /run
-      - /tmp
+  - name: netology
+    image: docker.io/aragast/netology:latest
+    pre_build_image: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
-    env:
-      ANSIBLE_USER: ansible
-      SUDO_GROUP: wheel
-      DEPLOY_GROUP: deployer
-      container: podman
+      - "$MOLECULE_PROJECT_DIRECTORY/systemctl3.py:/usr/bin/systemctl"
+      - "$MOLECULE_PROJECT_DIRECTORY:/opt/vector-role"
+    workdir: /opt/vector_role
+    privileged: true
 provisioner:
   name: ansible
 verifier:
   name: ansible
 scenario:
-  name: podman
   test_sequence:
-    - lint
-    - destroy
-    - create
-    - converge
-    - verify
-    - destroy
+  - destroy
+  - create
+  - converge
+  - verify
+  - destroy

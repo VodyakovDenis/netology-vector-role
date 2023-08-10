@@ -1,39 +1,39 @@
-netology-devops-ansible-vector
+vector-role
 =========
 
-Данная роль устанавливает `vector`.
+Учебная роль.
+Устанавливает и настраивает [vector](https://vector.dev).
 
 Requirements
 ------------
 
-None
 
-Role Variables
---------------
-
-- `vector_version` - версия `vector`, которая будет установлена
-- `vector_config_dir` - директория с конфигурацией `vector`
-- `vector_config` - полная конфигурация `vector`. Описание возможных значений [в официальной документации](https://vector.dev/docs/reference/configuration/)
+ vector_version - Определяет версию vector 
 
 Dependencies
 ------------
 
-None
+No dependencies
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-```yaml
----
-- name: vector
-  hosts: vector
-  roles:
-    - vector
-```
+    - hosts: servers
+      roles:
+         - vector-role
 
 License
 -------
 
-BSD
+MIT
+
+Author Information
+------------------
+[Vector](https://vector.dev) by [Datadog](https://www.datadoghq.com/about/)
+
+Role by [Maslov Konstantin](https://github.com/maslovkv).
+
+Dear contributors, thank you.
+
