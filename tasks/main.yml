@@ -50,4 +50,4 @@
     mode: "0644"
     backup: true
   notify:
-    - restart-vector
+   # - restart-vector
